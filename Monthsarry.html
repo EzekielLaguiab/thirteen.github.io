@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monthsarry Quiz</title>
+<style>
+     
+
+
+
+     
+    /* CSS styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #222831; /* Updated background color */
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
+    }
+
+    
+    .container {
+        max-width: 600px;
+        margin: 0 auto; 
+        text-align: center;
+        padding: 20px; /* Added padding */
+    }
+    h1 {
+        color: #fff; /* Updated text color */
+    }
+    .question {
+        margin-bottom: 20px;
+        color: #fff; /* Updated text color */
+    }
+    .start{
+        margin: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #00ADB5; /* Updated button color */
+        color: #fff; /* Updated text color */
+        border: none; /* Remove button border */
+        border-radius: 5px;
+    }
+
+    .options button {
+        margin: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #00ADB5; /* Updated button color */
+        color: #fff; /* Updated text color */
+        border: none; /* Remove button border */
+        border-radius: 5px; /* Add border radius */
+    }
+    #result {
+        margin-top: 20px;
+        font-weight: bold;
+        color: #fff; /* Updated text color */
+    }
+    #resultImg {
+        width: 150px; /* Default size in pixels */
+        height: auto;
+        display: none;
+    }
+
+    /* Responsive Styles */
+    @media only screen and (max-width: 600px) {
+        .container {
+            max-width: 100%;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Happy Monthsarry!</h1> <!-- Added intro message -->
+    <p style="color: white;">Let's celebrate with a naughty questions</p> <!-- Added intro message -->
+    <button class="start" onclick="startQuiz()">Are you ready?</button> <!-- Added Start Game button -->
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+    <button onclick="restartQuiz()">Again</button>
+    <div style="color: white;" id="selectedAnswers"></div>
+</div>
+
+<script>
+    const questions = [
+    {
+        question: "What's your favorite part of my body?",
+        options: ["Lips – they're so kissable", "Butt – it's irresistible", "Chest – love feeling your heartbeat", "Eyes – they're mesmerizing"],
+        
+    },
+    {
+        question: "If we could reenact a scene from a steamy movie, which one would it be?",
+        options: ["Fifty Shades of Grey", "365 Days", "9 1/2 Weeks", "Wild Things"],
+        
+    },
+    {
+        question: "What's the most embarrassing thing that's happened to us during our intimate moments?",
+        options: ["got diarrhea", "Farted in bed", "Knocked over a bedside lamp", "Couldn't find the condom"],
+      
+    },
+
+    {
+        question: "If we were to sneak away for a secret rendezvous right now, where would you take me?",
+        options: ["A secluded beach at night", "A luxury hotel with a Jacuzzi", "An empty movie theater", "A rooftop overlooking the city"],
+   
+    },
+    {
+        question: "Have you ever had a steamy dream about me? Care to share?",
+        options: ["Yes, and it was wild!", "No, but I'd love to hear about yours.", "Let's keep that a secret for now.", "Every night 😉"],
+       
+    },
+    {
+        question: "What's one thing you've always wanted to try in the bedroom but haven't yet?",
+        options: ["Using blindfolds and restraints", "Dog Style", "Trying out role reversal", "Watching adult movies together"],
+      
+    },
+    {
+        question: "If we could spend a night in a hotel suite together, what would we do first?",
+        options: ["Order room service and feed each other", "Take a long, steamy shower together", "Explore every corner of the suite for potential naughty activities", "Jump on the bed and have a pillow fight"],
+        
+    },
+    {
+        question: "Describe our relationship using only emojis – be as naughty as you like!",
+        options: ["😈💋🔥", "🍑💦😏", "🥵❤️😈", "💑🌶️🎉"],
+     
+    }
+    // Add more questions here...
+];
+
+
+    let selectedAnswers = [];
+    let currentQuestion = 0;
+
+    function startQuiz() {
+        document.querySelector('button').style.display = 'none'; // Hide the Start Game button
+        displayQuestion();
+    }
+
+    function displayQuestion() {
+        const questionElement = document.getElementById('question');
+        const optionsElement = document.getElementById('options');
+        questionElement.textContent = questions[currentQuestion].question;
+        optionsElement.innerHTML = '';
+        questions[currentQuestion].options.forEach(option => {
+            const button = document.createElement('button');
+            button.textContent = option;
+            button.onclick = () => checkAnswer(option);
+            optionsElement.appendChild(button);
+        });
+    }
+
+    function checkAnswer(selectedOption) {
+        selectedAnswers.push(selectedOption);
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+            displayQuestion();
+        } else {
+            showSelectedAnswers();
+        }
+    }
+
+    function showSelectedAnswers() {
+        const selectedAnswersElement = document.getElementById('selectedAnswers');
+        selectedAnswersElement.innerHTML = "<h2>Your Selected Answers:</h2>";
+        selectedAnswers.forEach(answer => {
+            const answerElement = document.createElement('p');
+            answerElement.textContent = answer;
+            selectedAnswersElement.appendChild(answerElement);
+        });
+
+        // Adding a single image below all selected answers
+        const imgElement = document.createElement('img');
+        imgElement.src = '5.jpg'; // Add the path to your image here
+        imgElement.style.width = '200px'; // Adjust image width as needed
+        imgElement.style.height = 'auto'; // Maintain aspect ratio
+        selectedAnswersElement.appendChild(imgElement);
+    }
+
+    function restartQuiz() {
+        currentQuestion = 0;
+        selectedAnswers = [];
+        displayQuestion();
+        document.getElementById('selectedAnswers').innerHTML = '';
+    }
+</script>
+</body>
+</html>
